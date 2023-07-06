@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Define the generator to use the Prisma client for JavaScript
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Define the database configuration
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL") // Retrieve the database URL from environment variables
+  relationMode = "prisma" // Set the relation mode to Prisma
+}
+
+// Define the data model for the "Store" entity
+model Store {
+  id        String    @id @default(uuid())  // Primary key for the Store, generated as a UUID
+  name      String                          // Name of the store
+  userId    String                          // Foreign key referencing the user associated with the store
+  createdAt DateTime  @default(now())       // Date and time when the store was created
+  updateAt  DateTime  @updatedAt            // Date and time when the store was last updated
+}
