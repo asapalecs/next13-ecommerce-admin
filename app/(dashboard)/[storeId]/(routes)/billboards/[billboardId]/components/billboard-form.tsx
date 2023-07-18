@@ -9,7 +9,6 @@ import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
-import { useOrigin } from "@/hooks/use-origin";
 
 import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
@@ -24,7 +23,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alert-modal";
-import { ApiAlert } from "@/components/ui/api-alert";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
@@ -43,7 +41,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
 }) => {
   const params = useParams();
   const router = useRouter();
-  const origin = useOrigin();
 
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -86,11 +83,14 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
   const onDelete = async () => {
     try {
       setLoading(true);
+      // await axios.delete(
+      //   `/api/stores/${params.storeId}/billboards/${params.billboardId}`
+      // );
       await axios.delete(
-        `/api/stores/${params.storeId}/billboards/${params.billboardId}`
+        `/api/${params.storeId}/billboards/${params.billboardId}`
       );
       router.refresh();
-      router.push("/");
+      router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard deleted successfully.");
     } catch (error) {
       toast.error(
@@ -170,7 +170,6 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
           <Button disabled={loading} className="ml-auto" type="submit">
             {action}
           </Button>
-          <Separator />
         </form>
       </Form>
     </>
