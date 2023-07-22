@@ -39,6 +39,16 @@ export function MainNav({
       active: `/${params.storeId}/colors`,
     },
     {
+      href: `/${params.storeId}/products`,
+      label: "Products",
+      active: `/${params.storeId}/products`,
+    },
+    {
+      href: `/${params.storeId}/orders`,
+      label: "Orders",
+      active: `/${params.storeId}/orders`,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: `/${params.storeId}/settings`,
