@@ -42,7 +42,6 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
         `/api/${params.storeId}/categories/${data.id}`
       );
       router.refresh();
-      router.push("/");
       toast.success("Category deleted successfully.");
     } catch (error) {
       toast.error(
