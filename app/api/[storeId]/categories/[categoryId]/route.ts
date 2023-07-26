@@ -16,6 +16,7 @@ export async function GET(
     // Căutăm billboard-ul utilizând ID-ul
     const category = await prismadb.category.findUnique({
       where: { id: params.categoryId },
+      include: {billboard: true }
     });
 
     // Returnăm răspunsul JSON cu category-ul
